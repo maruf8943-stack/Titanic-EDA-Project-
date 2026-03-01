@@ -1,21 +1,17 @@
-# ==============================
-# TITANIC EDA COMPLETE PROJECT
-# ==============================
 
-# 1️⃣ Import Libraries
+# TITANIC EDA PROJECT
+
+
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# 2️⃣ Load Dataset
+
 df = pd.read_csv("titanic_sample.csv")
 
 print("First 5 Rows:")
 print(df.head())
-
-# ==================================
-# 3️⃣ Basic Information
-# ==================================
 
 print("\nShape of Dataset:")
 print(df.shape)
@@ -26,27 +22,25 @@ print(df.info())
 print("\nStatistical Summary:")
 print(df.describe())
 
-# ==================================
-# 4️⃣ Missing Value Analysis
-# ==================================
+
+# Missing Value 
+
 
 print("\nMissing Values:")
 print(df.isnull().sum())
 
-# Fill missing Age with median
+
 df["Age"].fillna(df["Age"].median(), inplace=True)
 
-# Fill missing Embarked with mode
+
 df["Embarked"].fillna(df["Embarked"].mode()[0], inplace=True)
 
 print("\nMissing Values After Cleaning:")
 print(df.isnull().sum())
 
-# ==================================
-# 5️⃣ Univariate Analysis
-# ==================================
 
-# Survival Count
+
+
 print("\nSurvival Count:")
 print(df["Survived"].value_counts())
 
@@ -70,9 +64,6 @@ plt.title("Age Distribution")
 plt.xlabel("Age")
 plt.show()
 
-# ==================================
-# 6️⃣ Bivariate Analysis
-# ==================================
 
 # Survival by Gender
 print("\nSurvival by Gender:")
@@ -90,9 +81,7 @@ pd.crosstab(df["Pclass"], df["Survived"]).plot(kind="bar")
 plt.title("Survival by Passenger Class")
 plt.show()
 
-# ==================================
-# 7️⃣ Fare Analysis
-# ==================================
+
 
 print("\nFare Statistics:")
 print(df["Fare"].describe())
@@ -101,9 +90,6 @@ df["Fare"].plot(kind="box")
 plt.title("Fare Distribution (Boxplot)")
 plt.show()
 
-# ==================================
-# 8️⃣ Correlation Analysis
-# ==================================
 
 print("\nCorrelation Matrix:")
 print(df.corr(numeric_only=True))
@@ -112,9 +98,7 @@ sns.heatmap(df.corr(numeric_only=True), annot=True)
 plt.title("Correlation Heatmap")
 plt.show()
 
-# ==================================
-# 9️⃣ Feature Engineering
-# ==================================
+
 
 # Create Family Size Feature
 df["FamilySize"] = df["SibSp"] + df["Parch"] + 1
@@ -125,13 +109,12 @@ print(df[["SibSp","Parch","FamilySize"]].head())
 print("\nSurvival by Family Size:")
 print(pd.crosstab(df["FamilySize"], df["Survived"]))
 
-# ==================================
-# 🔟 Drop Unnecessary Columns
-# ==================================
+
 
 df.drop(["Cabin","Ticket","Name"], axis=1, inplace=True)
 
 print("\nFinal Dataset:")
 print(df.head())
 
-print("\nEDA Project Completed Successfully ✅")
+
+print("\nEDA Project Completed Successfully ")
